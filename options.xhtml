@@ -11548,7 +11548,7 @@ typically requires performing some manual steps, such as data
 conversion or moving files.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-one of “18.09”, “19.03”, “19.09”, “20.03”, “20.09”, “21.03”, “21.05”, “21.11”, “22.05”, “22.11”, “23.05”, “23.11”, “24.05”, “24.11”, “25.05”, “25.11”</p>
+one of “18.09”, “19.03”, “19.09”, “20.03”, “20.09”, “21.03”, “21.05”, “21.11”, “22.05”, “22.11”, “23.05”, “23.11”, “24.05”, “24.11”, “25.05”, “25.11”, “26.05”</p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -14415,8 +14415,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -14457,16 +14457,13 @@ one of “silent”, “notify”, “show”</p>
  </span>
 </dt>
 <dd>
-<p>The Nix package that the configuration should be generated for.</p>
+<p>The nix package to use.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 null or package</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">null</code></p>
-
-<p><span class="emphasis"><em>Example:</em></span>
-<code class="literal">pkgs.nix</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -22625,7 +22622,6 @@ list of string</p>
 
 <p><span class="emphasis"><em>Default:</em></span></p><pre><code class="programlisting">[
   &quot;histappend&quot;
-  &quot;checkwinsize&quot;
   &quot;extglob&quot;
   &quot;globstar&quot;
   &quot;checkjobs&quot;
@@ -26293,6 +26289,85 @@ JSON value</p>
   theme = &quot;dark&quot;;
 }
 </code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/claude-code.nix" target="_top">
+&lt;home-manager/modules/programs/claude-code.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.claude-code.skills"></a><a class="term" href="options.xhtml#opt-programs.claude-code.skills"><code class="option">programs.claude-code.skills</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Custom skills for Claude Code.
+The attribute name becomes the skill filename or directory name, and the value is either:</p><div class="itemizedlist"><ul class="itemizedlist " style="list-style-type: disc;"><li class="listitem"><p>Inline content as a string (creates .claude/skills/&lt;name&gt;.md)</p></li><li class="listitem"><p>A path to a file (creates .claude/skills/&lt;name&gt;.md)</p></li><li class="listitem"><p>A path to a directory (creates .claude/skills/&lt;name&gt;/ with all files)</p></li></ul></div>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (strings concatenated with “\n” or absolute path)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  xlsx = ./skills/xlsx.md;
+  data-analysis = ./skills/data-analysis;
+  pdf-processing = &#x27;&#x27;
+    ---
+    name: pdf-processing
+    description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
+    ---
+
+    # PDF Processing
+
+    ## Quick start
+
+    Use pdfplumber to extract text from PDFs:
+
+    ```python
+    import pdfplumber
+
+    with pdfplumber.open(&quot;document.pdf&quot;) as pdf:
+        text = pdf.pages[0].extract_text()
+    ```
+  &#x27;&#x27;;
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/claude-code.nix" target="_top">
+&lt;home-manager/modules/programs/claude-code.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.claude-code.skillsDir"></a><a class="term" href="options.xhtml#opt-programs.claude-code.skillsDir"><code class="option">programs.claude-code.skillsDir</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Path to a directory containing skill files for Claude Code.
+Skill files from this directory will be symlinked to .claude/skills/.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or absolute path</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">./skills</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -30882,8 +30957,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -31713,8 +31788,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -33334,8 +33409,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -34165,8 +34240,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -50123,8 +50198,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -50954,8 +51029,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -53007,13 +53082,13 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>meli package to use</p>
+<p>The meli package to use.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 package</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">&lt;derivation meli-0.8.12&gt;</code></p>
+<code class="literal">pkgs.meli</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -57723,6 +57798,33 @@ boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <a class="xref" href="options.xhtml#opt-home.shell.enableFishIntegration"  ><code class="option">home.shell.enableFishIntegration</code></a></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nix-index.nix" target="_top">
+&lt;home-manager/modules/programs/nix-index.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nix-index.enableNushellIntegration"></a><a class="term" href="options.xhtml#opt-programs.nix-index.enableNushellIntegration"><code class="option">programs.nix-index.enableNushellIntegration</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Nushell integration.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<a class="xref" href="options.xhtml#opt-home.shell.enableNushellIntegration"  ><code class="option">home.shell.enableNushellIntegration</code></a></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">false</code></p>
@@ -62528,12 +62630,13 @@ available keys.</p>
 <p><span class="emphasis"><em>Type:</em></span>
 attribute set of string</p>
 
-<p><span class="emphasis"><em>Default:</em></span></p><pre><code class="programlisting">{ PASSWORD_STORE_DIR = &quot;$XDG_DATA_HOME/password-store&quot;; }
+<p><span class="emphasis"><em>Default:</em></span></p><pre><code class="programlisting">{ }                                                       for state version ≥ 25.11
+{ PASSWORD_STORE_DIR = &quot;$XDG_DATA_HOME/password-store&quot;; } for state version &lt; 25.11
 
 </code></pre>
 
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
-  PASSWORD_STORE_DIR = &quot;/some/directory&quot;;
+  PASSWORD_STORE_DIR = &quot;$\{config.xdg.dataHome\}/password-store&quot;;
   PASSWORD_STORE_KEY = &quot;12345678&quot;;
   PASSWORD_STORE_CLIP_TIME = &quot;60&quot;;
 }
@@ -78013,8 +78116,8 @@ list of (maintainer)</p>
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
-<code class="filename"><a class="filename"  href="file:///nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix" target="_top">
-/nix/store/i5ywdk0qf0ahgns6w0zsql1nlwlj9y38-source/modules/generic/meta-maintainers.nix
+<code class="filename"><a class="filename"  href="file:///nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix" target="_top">
+/nix/store/8r122bbj0jfjv469zbzwjvkxk72l839v-source/modules/generic/meta-maintainers.nix
 </a></code>
 </td></tr>
 </table>
@@ -83073,7 +83176,7 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>Waybar package to use. Set to <code class="literal">null</code> to use the default package.</p>
+<p>The waybar package to use.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 package</p>
@@ -90277,8 +90380,8 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>Package containing <a class="link" href="https://github.com/ActivityWatch/aw-server-rust"  target="_top">the Rust implementation of ActivityWatch
-server</a>.</p>
+<p>The activitywatch package to use. Specifically, this should be a package containing <a class="link" href="https://github.com/ActivityWatch/aw-server-rust"  target="_top">the Rust implementation
+of ActivityWatch server</a>.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 package</p>
@@ -94018,7 +94121,7 @@ package</p>
 </dt>
 <dd>
 <p>List of presets to import to easyeffects.
-Presets are written to input and output folder in <code class="literal">$XDG_CONFIG_HOME/easyeffects</code>.
+Presets are written to input and output folder in <code class="literal">$XDG_DATA_HOME/easyeffects</code>.
 Top level block (input/output) determines the folder the file is written to.</p><p>See community presets at:
 https://github.com/wwmm/easyeffects/wiki/Community-Presets</p>
 
@@ -103428,10 +103531,10 @@ package</p>
  </span>
 </dt>
 <dd>
-<p>Absolute path to password store. Defaults to
-<code class="filename">$HOME/.password-store</code> if the
-<code class="option">programs.password-store</code> module is not enabled, and
-<code class="option">programs.password-store.settings.PASSWORD_STORE_DIR</code> if it is.</p>
+<p>Absolute path to the password store. If the
+<code class="option">programs.password-store</code> module is enabled, the
+<code class="option">programs.password-store.settings.PASSWORD_STORE_DIR</code> option
+will be checked, if found it will be inherited as the default.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 null or string</p>
@@ -112853,7 +112956,7 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>Syncthing tray package to use.</p>
+<p>The syncthingtray package to use.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 package</p>
@@ -112862,7 +112965,7 @@ package</p>
 <code class="literal">pkgs.syncthingtray-minimal</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
-<code class="literal">pkgs.qsyncthingtray</code></p>
+<code class="literal">qsyncthingtray</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -120611,6 +120714,27 @@ attribute set</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-targets.genericLinux.gpu.drivers"></a><a class="term" href="options.xhtml#opt-targets.genericLinux.gpu.drivers"><code class="option">targets.genericLinux.gpu.drivers</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Resulting drivers package.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package <span class="emphasis"><em>(read only)</em></span></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/targets/generic-linux/gpu" target="_top">
+&lt;home-manager/modules/targets/generic-linux/gpu&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-targets.genericLinux.gpu.nixStateDirectory"></a><a class="term" href="options.xhtml#opt-targets.genericLinux.gpu.nixStateDirectory"><code class="option">targets.genericLinux.gpu.nixStateDirectory</code>
   </a>
  </span>
@@ -120713,6 +120837,27 @@ null or string matching the pattern [0-9]{3}\.[0-9]{2,3}\.[0-9]{2}</p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">550.163.01</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/targets/generic-linux/gpu" target="_top">
+&lt;home-manager/modules/targets/generic-linux/gpu&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-targets.genericLinux.gpu.setupPackage"></a><a class="term" href="options.xhtml#opt-targets.genericLinux.gpu.setupPackage"><code class="option">targets.genericLinux.gpu.setupPackage</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Resulting setup package.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package <span class="emphasis"><em>(read only)</em></span></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
